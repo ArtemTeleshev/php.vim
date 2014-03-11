@@ -34,45 +34,66 @@ $allowed_extensions = [
 	'amqp',
 	'apcu',
 	'bcmath',
+	'blitz',
+	'boxwood',
 	'bz2',
 	'calendar',
+	'chdb',
 	#'com_dotnet',
 	'core',
 	'couchbase',
+	'crypto',
 	'ctype',
 	'curl',
 	'date',
 	'dba',
+	'dbase',
+	'dmtx',
 	'dom',
 	#'enchant',
 	'ereg',
+	'ev',
 	'exif',
 	'fileinfo',
 	'filter',
 	'ftp',
+	'gearman',
 	'gd',
 	'geoip',
 	'gettext',
 	'gmagick',
 	#'gmp',
+	'graphdat',
 	'hash',
+	'http',
 	'iconv',
+	'igbinary',
 	'imagick',
 	#'imap',
 	#'interbase',
 	'intl',
+	'jsmin',
 	'json',
+	'judy',
 	'ldap',
+	'leveldb',
+	'libevent',
+	'libvirt',
 	'libxml',
+	'lzf',
+	'mailparse',
 	'mbstring',
 	'mcrypt',
 	'memcache',
 	'memcached',
 	'mhash',
 	'mongo',
+	'mosquitto',
+	'msgpack',
 	#'mssql',
 	'mysql',
 	'mysqli',
+	'mysqlnd_ms',
 	'oauth',
 	#'oci8',
 	#'oci8_11g',
@@ -83,41 +104,65 @@ $allowed_extensions = [
 	'pgsql',
 	'phar',
 	'pcntl',
+	'phalcon',
 	'posix',
+	'proctitle',
+	'propro',
 	'pspell',
+	'raphf',
 	'readline',
 	#'recode',
 	'redis',
+	'redland',
 	'reflection',
+	'riak',
+	'runkit',
 	'session',
 	'shmop',
 	'simplexml',
+	'snappy',
 	'snmp',
 	'soap',
 	'sockets',
+	'solr',
+	'sphinx',
 	'spl',
 	#'sqlite',
 	'sqlite3',
+	'ssh2',
 	'standard',
+	'stats',
+	'sundown',
+	'swoole',
 	#'sybase_ct',
 	'sysvmsg',
 	'sysvsem',
 	'sysvshm',
 	'test_helpers',
 	'tidy',
+	'timezonedb',
 	'tokenizer',
 	#'tokyotyrant',
+	'uploadprogress',
+	'uuid',
 	#'varnish',
+	'wbxml',
 	'wddx',
+	'xcache',
 	'xdebug',
 	'xml',
+	'xmldiff',
 	'xmlreader',
 	'xmlrpc',
 	'xmlwriter',
 	'xsl',
+	'yaf',
 	'yaml',
+	'yar',
+	'yaz',
 	'zip',
 	'zlib',
+	'zookeeper',
 ];
 
 $processed = [];
@@ -143,17 +188,17 @@ foreach ($allowed_extensions as $extension)
 
 		$details['name'] = $options->getName();
 
-		if (sizeof ($functions))
+		if (sizeof($functions))
 		{
 			$details['functions'] = implode(' ', $functions);
 		}
 
-		if (sizeof ($constants))
+		if (sizeof($constants))
 		{
 			$details['constants'] = implode(' ', $constants);
 		}
 
-		if (sizeof ($classes))
+		if (sizeof($classes))
 		{
 			$details['classes'] = implode(' ', $classes);
 		}
@@ -162,7 +207,12 @@ foreach ($allowed_extensions as $extension)
 	}
 	catch (Exception $e)
 	{
-		print "ERROR: '{$extension}' -- " . $e->getMessage() . "\n";
+		echo 'ERROR: "' . $extension . '" -- ' . $e->getMessage() . "\n";
+
+		if ($argc == 2 && $argv[1] == 'brew')
+		{
+			passthru('brew install php55-' . $extension);
+		}
 	}
 }
 
@@ -170,8 +220,13 @@ $code = "syn case match\n\n";
 
 foreach ($processed as $extension)
 {
-	if (isset ($extension['constants']))
+	if (isset($extension['constants']))
 	{
+		if ($extension['name'] == 'apcu')
+		{
+			$extension['constants'] = str_replace("\0apc_register_serializer-0 ", '', $extension['constants']);
+		}
+
 		$code = $code . '" ' . $extension['name'] . "\n";
 		$code = $code . 'syn keyword phpConstants ' . $extension['constants'] . " contained\n\n";
 	}
@@ -183,12 +238,12 @@ foreach ($processed as $extension)
 {
 	$code = $code . '" ' . $extension['name'] . "\n";
 
-	if (isset ($extension['functions']))
+	if (isset($extension['functions']))
 	{
 		$code = $code . 'syn keyword phpFunctions ' . $extension['functions'] . " contained\n";
 	}
 
-	if (isset ($extension['classes']))
+	if (isset($extension['classes']))
 	{
 		$code = $code . 'syn keyword phpClasses ' . $extension['classes'] . " contained\n\n";
 	}
