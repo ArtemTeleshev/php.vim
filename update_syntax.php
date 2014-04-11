@@ -9,7 +9,7 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  *
  * @author Stan Angeloff <stanimir@angeloff.name>
- * @author Joshua Sherman <josh@gravityblvd.com>
+ * @author Josh Sherman <josh@gravityblvd.com>
  */
 
 /**
@@ -142,10 +142,10 @@ $allowed_extensions = [
 	'tidy',
 	'timezonedb',
 	'tokenizer',
-	#'tokyotyrant',
+	'tokyo_tyrant',
 	'uploadprogress',
 	'uuid',
-	#'varnish',
+	'varnish',
 	'wbxml',
 	'wddx',
 	'xcache',

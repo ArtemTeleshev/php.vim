@@ -9,7 +9,7 @@ syntax file distributed with Vim.
 The point of this fork is to embrace the latest and greatest PHP has to offer
 and constantly update against the latest PHP release.
 
-Last updated against **5.5.10**
+Last updated against **5.5.11**
 
   [StanAngeloff]: https://github.com/StanAngeloff/php.vim
   [garvin]:  https://github.com/vim-scripts/php.vim--Garvin
