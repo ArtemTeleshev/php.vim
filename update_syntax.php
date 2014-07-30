@@ -145,7 +145,7 @@ $allowed_extensions = [
 	'tokyo_tyrant',
 	'uploadprogress',
 	'uuid',
-	#'varnish',
+	'varnish',
 	'wbxml',
 	'wddx',
 	'xcache',
