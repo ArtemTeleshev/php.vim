@@ -1,5 +1,4 @@
-php.vim
-=======
+# php.vim
 
 This project is a fork of [php.vim][StanAngeloff] which is an improved version
 of [php.vim--Garvin][garvin] which in turn is an update of the
@@ -9,14 +8,9 @@ syntax file distributed with Vim.
 The point of this fork is to embrace the latest and greatest PHP has to offer
 and constantly update against the latest PHP release.
 
-Last updated against **5.5.16**
+Last updated against **5.5.17**
 
-  [StanAngeloff]: https://github.com/StanAngeloff/php.vim
-  [garvin]:  https://github.com/vim-scripts/php.vim--Garvin
-  [php-vim]: http://www.vim.org/scripts/script.php?script_id=2874
-
-Improvements
-------------
+## Improvements
 
 - Spell checking was enabled in strings and comments (both single and
   multi-line).
@@ -30,18 +24,14 @@ Improvements
 - New modules added: memcache, memcached, redis, test_helpers and xdebug
 - Support for static classes and docblock parameters (patched by @kris89)
 
-  [html5]: https://github.com/othree/html5.vim
-
-Customising
------------
+## Customising
 
 A script `update_syntax.php` is provided to re-generate the syntax file.
 A single variable `$allowed_extensions` can be customised to
 [turn on/off][defaults] certain extensions.
 
-When re-generating the syntax file, you must have allowed extensions installed.
-
-  [defaults]: https://github.com/StanAngeloff/php.vim/blob/master/update_syntax.php#L29-L101
+When re-generating the syntax file, you must have allowed extensions
+installed.
 
 ### Original README
 
@@ -49,11 +39,18 @@ When re-generating the syntax file, you must have allowed extensions installed.
 > The list of PHP constants, functions, and classes was updated to be current
 > with PHP 5.3. Many new classes were added in the 5.2 branch and the
 > distributed version only covers up to 5.1.4. In addition I simplified the
-> file, removing several sections that are not often used (at least by me) such
-> as automatic folding of all control structures and ASP tags support. I also
-> removed several switches designed for b/c with VIM 5.X and 6.X. As an
+> file, removing several sections that are not often used (at least by me)
+> such as automatic folding of all control structures and ASP tags support. I
+> also removed several switches designed for b/c with VIM 5.X and 6.X. As an
 > addition I have included the PHP file I used to generate the constant,
 > function, class list. It uses reflection to mine out these items from your
-> PHP installation and generate part of the php.vim script. Before running open
-> up the file and adjust the output file location and the list of extensions to
-> generate syntax for. Then run "php php_vimgen.php" from your shell.
+> PHP installation and generate part of the php.vim script. Before running
+> open up the file and adjust the output file location and the list of
+> extensions to generate syntax for. Then run "php php_vimgen.php" from your
+> shell.
+
+[defaults]:     https://github.com/StanAngeloff/php.vim/blob/master/update_syntax.php#L29-L101
+[garvin]:       https://github.com/vim-scripts/php.vim--Garvin
+[html5]:        https://github.com/othree/html5.vim
+[php-vim]:      http://www.vim.org/scripts/script.php?script_id=2874
+[StanAngeloff]: https://github.com/StanAngeloff/php.vim
